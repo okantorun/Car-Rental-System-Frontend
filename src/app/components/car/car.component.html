@@ -1,4 +1,4 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+<!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 <table *ngIf="dataLoaded==true" class="table">
@@ -18,4 +18,28 @@
     <td>{{ car.colorName }}</td>
     <td>{{ car.dailyPrice }}</td>
   </tr>
-</table>
+</table> -->
+
+<div class="row">
+  <div class="col-md-4" *ngFor = "let car of cars">
+    <div class="card" style="width: 18rem;">
+      <img [src] ="getCarImage(car)" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title text-center">{{car.carName |uppercase}} </h4>
+        <h6 class="text-center">{{car.brandName}} </h6>
+      </div>
+      <ul class="list-group list-group-flush text-center text-bolder">
+        <li class="list-group-item"><i><b>Model Yılı</b></i> | {{car.modelYear}}</li>
+        <li class="list-group-item"><i><b>Günlük Fiyat</b></i> | {{car.dailyPrice | currency:"₺" }}</li>
+        <li class="list-group-item"><i><b>Aylık Fiyat</b></i> | {{car.dailyPrice  | currency:"₺"}}</li>
+
+      </ul>
+      <div class="card-body text-center">
+        <a href="#" class="btn btn-outline-secondary" >Detaya Git</a>
+      
+      </div>
+    </div>
+    <br>
+  </div>
+ 
+</div>

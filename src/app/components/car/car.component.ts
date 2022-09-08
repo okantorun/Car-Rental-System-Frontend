@@ -13,7 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class CarComponent implements OnInit {
   cars: Car[] = [];
   dataLoaded = false;
-
+  imageUrl = "https://localhost:44360/Uploads/Images/"
+  
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute
@@ -52,5 +53,11 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  getCarImage(car:Car){
+    let path = this.imageUrl + car.imagePath[0];
+    console.log(car)
+    return path;
   }
 }
