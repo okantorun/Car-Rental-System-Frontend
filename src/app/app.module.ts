@@ -10,6 +10,12 @@ import { ColorComponent } from './components/color/color.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { NaviComponent } from './components/navi/navi.component';
+import { CarDetailPageComponent } from './components/car-detail-page/car-detail-page.component';
+import { FilterPipeCarPipe } from './pipes/filter-pipe-car.pipe';
+import { FilterPipeColorPipe } from './pipes/filter-pipe-color.pipe';
+import { FilterPipeBrandPipe } from './pipes/filter-pipe-brand.pipe';
+import { VatAddedPipe } from './pipes/vat-added.pipe';
+import { MonthlyPriceAddedPipe } from './pipes/monthly-price-added.pipe';
 
 @NgModule({
   declarations: [
@@ -19,14 +25,24 @@ import { NaviComponent } from './components/navi/navi.component';
     ColorComponent,
     CustomerComponent,
     RentalComponent,
-    NaviComponent
+    NaviComponent,
+    CarDetailPageComponent,
+    FilterPipeCarPipe,
+    FilterPipeColorPipe,
+    FilterPipeBrandPipe,
+    VatAddedPipe,
+    MonthlyPriceAddedPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }

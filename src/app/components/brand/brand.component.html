@@ -1,7 +1,14 @@
 <ul class="list-group">
+  <li class=" list-group-item bg-black bg-gradient text-light text-center mb-1 rounded ">
+    <strong>Markalar</strong>
+  </li>
+  <div class="mb-1">
+    <input type="text" class="form-control" id="filterBrand" placeholder="Marka adı giriniz">
+  </div>
   <li (click)="refreshCurrentBrand()" [class]="getAllBrandClass()" routerLink="/cars">Tüm Ürünler</li>
   <li (click)="setCurrentBrand(brand)" 
   routerLink = "/cars/brand/{{brand.brandId}}"
   *ngFor="let brand of brands" 
   [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
 </ul>
+

@@ -6,6 +6,6 @@ export interface Car{
     modelYear:number;
     description:string;
     dailyPrice:number;
-    imagePath:string;
+    imagePath:string[];
 
 }

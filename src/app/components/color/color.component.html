@@ -1,4 +1,10 @@
 <ul class="list-group">
+  <li class=" list-group-item bg-black bg-gradient text-light text-center mb-1 rounded ">
+    <strong>Renkler</strong>
+  </li>
+  <div class="mb-1">
+    <input type="text" class="form-control" id="filterBrand" placeholder="Renk adı giriniz">
+  </div>
   <li (click)="refreshCurrentColor()" [class]="getAllColorClass()" routerLink="/cars">Tüm Ürünler</li>
   <li (click)="setCurrentColor(color)" 
   routerLink = "/cars/color/{{color.colorId}}"

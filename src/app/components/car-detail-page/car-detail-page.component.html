@@ -1,0 +1,40 @@
+<div class="card" style="width:100%;margin-top: 20px;">
+
+    <div class="row"style="max-height: 80%;">
+  
+    </div>
+      <div  style="height:95%; width: 100%;" >
+        <div *ngFor="let imagePath of carImagePaths; let index=index" >
+          <img [src]="imageUrl+imagePath" alt="image slide"class="image-fluid" style=" height:400px;width: 100%; object-fit: cover">
+      
+          <div class="carousel-caption">
+            <h4>Görsel: {{index+1}} </h4>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    
+        <!-- car detail sayfası araç detay bilgileiri -->
+        <div *ngFor="let car of cars" class="card-body">
+          <div class="card-body detailsFontInfo">
+  
+              <h5 class="card-title">
+              {{ car?.carName }} || {{ car?.brandName }}
+              </h5>
+              
+          </div>
+      
+          <ul class="list-group list-group-flush  detailsFontInfo">
+              <li class="list-group-item"><b>Color :</b> {{ car?.colorName }}</li>
+              
+              <li class="list-group-item  detailsFontInfo"> <b>Model Year :</b> {{ car?.modelYear }}</li>
+  
+              <li class="list-group-item  detailsFontInfo"> <b>Daily Price :</b> {{ car?.dailyPrice | currency: "USD":true:"1.2-2" }}</li>
+  
+              <li class="list-group-item  detailsFontInfo"><b>Description:</b> {{ car?.description }}</li>
+  
+          </ul>
+      </div>
+      
+  
+  </div>

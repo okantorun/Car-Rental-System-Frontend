@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 
 import { CarService } from 'src/app/services/car.service';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'src/app/models/brand';
+import { Color } from 'src/app/models/color';
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
@@ -12,8 +14,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
+  brands: Brand[] = [];
+  colors: Color[] = [];
+  
   dataLoaded = false;
   imageUrl = "https://localhost:44360/Uploads/Images/"
+  currentCar:Car | null
   
   constructor(
     private carService: CarService,
@@ -57,7 +63,10 @@ export class CarComponent implements OnInit {
 
   getCarImage(car:Car){
     let path = this.imageUrl + car.imagePath[0];
-    console.log(car)
     return path;
+  }
+
+  setCurrentCarDetail(car:Car){
+    this.currentCar=car
   }
 }
