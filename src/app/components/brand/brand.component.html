@@ -1,14 +1,19 @@
-<ul class="list-group">
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<ul *ngIf="dataLoaded==true" class="list-group">
   <li class=" list-group-item bg-black bg-gradient text-light text-center mb-1 rounded ">
     <strong>Markalar</strong>
   </li>
   <div class="mb-1">
-    <input type="text" class="form-control" id="filterBrand" placeholder="Marka adı giriniz">
+    <input type="text" [(ngModel)]="filterBrand" class="form-control" id="filterBrand" placeholder="Marka adı giriniz">
   </div>
+ 
   <li (click)="refreshCurrentBrand()" [class]="getAllBrandClass()" routerLink="/cars">Tüm Ürünler</li>
   <li (click)="setCurrentBrand(brand)" 
   routerLink = "/cars/brand/{{brand.brandId}}"
-  *ngFor="let brand of brands" 
+  *ngFor="let brand of brands | filterBrandPipe:filterBrand" 
   [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
 </ul>
 

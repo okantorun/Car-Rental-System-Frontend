@@ -1,55 +1,75 @@
-<form class="row g-1 bg-dark bg-gradient">
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<form *ngIf="dataLoaded==true" class="row g-2 bg-dark bg-gradient">
   <div class="col-2">
-    <select  class="form-select" aria-label="Model adı">
-      <option ></option>
+    <select [ngModelOptions]="{ standalone: true }" [(ngModel)]="filterColorId" class="form-select" aria-label="Model adı">
+      <option *ngFor="let color of colors" [value]="color.colorId">{{color.colorName}}</option>
     </select>
   </div>
+  
   <div class="col-2">
-    <select   class="form-select" aria-label="Renk adı">
-      <option  ></option>
+    <select [ngModelOptions]="{ standalone: true }" [(ngModel)]="filterBrandId" class="form-select" aria-label="Renk adı">
+      <option *ngFor="let brand of brands" [value]="brand.brandId">{{brand.brandName}}</option>
     </select>
   </div>
   <div class="col-1">
-    <button  type="submit" class="btn btn-primary mb-3">Filtrele</button>
+    <button (click)="getCarsByFilter(filterBrandId,filterColorId)" type="submit" class="btn btn-primary mb-3">Filtrele</button>
   </div>
   <div class="col-1">
-    <button  type="submit" class="btn btn-danger mb-3">Temizle</button>
-  </div>  
+    <button (click)="getCars()" type="submit" class="btn btn-danger mb-3">Temizle</button>
+  </div>
   <div class="col-6">
     <div class="d-flex justify-content-end align-items-center">
       <div class="col-sm-3 mb-1 text-light">
-        <label>Model Arama: </label>        
+        <label>Marka Arama: </label>
       </div>
       <div class="mb-1">
-        <input type="text"  class="form-control" placeholder="Model adı giriniz">        
+        <input
+          type="text"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="filterCar"
+          class="form-control"
+          id="filterCar"
+          placeholder="Marka adı giriniz"
+        />
       </div>
     </div>
-  </div>  
+  </div>
 </form>
 
 <div class="row">
-  <div class="col-md-4" *ngFor = "let car of cars">
-    <div class="card" style="width: 18rem;">
-      <img [src] ="getCarImage(car)" class="card-img-top" alt="...">
+  <div *ngFor="let car of cars | filterCarPipe: filterCar" class="col-md-4">
+    <div class="card" style="width: 19rem">
+      <img [src]="getCarImage(car)" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h4 class="card-title text-center">{{car.carName | uppercase}} </h4>
-        <h6 class="text-center">{{car.brandName}} </h6>
+        <h4 class="card-title text-center">{{ car.brandName | uppercase }}</h4>
+        <h6 class="text-center">{{ car.carName }}</h6>
       </div>
       <ul class="list-group list-group-flush text-center text-bolder">
-        <li class="list-group-item"><i><b>Model Yılı</b></i> | {{car.modelYear}}</li>
-        <li class="list-group-item"><i><b>Günlük Fiyat</b></i> | {{car.dailyPrice | currency:"₺" }}</li>
-        <li class="list-group-item"><i><b>Aylık Fiyat</b></i> | {{car.dailyPrice  | monthlyPriceAdded:60 | currency:"₺"}}</li>
-
+        <li class="list-group-item">
+          <i><b>Model Yılı</b></i> | {{ car.modelYear }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Günlük Fiyat</b></i> | {{ car.dailyPrice | currency: "₺" }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Aylık Fiyat</b></i> |
+          {{ car.dailyPrice | monthlyPriceAdded: 60 | currency: "₺" }}
+        </li>
       </ul>
       <div class="card-body text-center">
-        <a href="#" li (click)="setCurrentCarDetail(car)" 
-        routerLink = "/cars/carDetailPage/{{car.carId}}"
-        class="btn btn-outline-secondary" >Detaya Git</a>
-      
+        <a
+          href="#"
+          li
+          (click)="setCurrentCarDetail(car)"
+          routerLink="/cars/carDetailPage/{{ car.carId }}"
+          class="btn btn-outline-secondary"
+          >Detaya Git</a
+        >
       </div>
     </div>
-    <br>
+    <br />
   </div>
- 
 </div>
-
